@@ -67,6 +67,7 @@ document.addEventListener('DOMContentLoaded', event => {
         } else if (msg.command === 'notificationBarPageDetails') {
             pageDetails.push(msg.data.details);
             watchForms(msg.data.forms);
+            addInputLogo(formData);
             sendResponse();
             return true;
         }
@@ -540,5 +541,21 @@ document.addEventListener('DOMContentLoaded', event => {
 
     function sendPlatformMessage(msg: any) {
         chrome.runtime.sendMessage(msg);
+    }
+    
+    function addInputLogo(formData: any[]){
+        const addBitWardenStyle = `background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAMAAABg3Am1AAAAAXNSR0IB2cksfwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAVBQTFRFAAAAMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzjZa7EAAAAHB0Uk5TAGOSmJRPBP/wZ5ygx4CC4ZDDBsWdD86RJeX5dF7+3j4Hq78Rj/pY824x2B7tJoS7mgIc2Rqhyid69g6V/FQFe/sN0RTAGcxO4rwVickfrlDIpRsKeZdI94UD6tXmZCO1/TAIWulwn+zumy8B0DPPwmJoSmgAAAFHSURBVHicY2AAAkYmZsKAhZWNAQbYiQIcnCRqYOciVQM3VTXw8CIDPn6CGgQYkAGb4KiGUQ2jGoaTBiFhkJgI8RpExUBi4sRrkJAECklJE69BRhYoJCcP50sS0KCgCBJSUoYLqKji16CmDhSR1UAIaGrh1aCtAxKR1EUS0sOngU0fLGJgiKTByBi3BhNTsICZObIjDS0scWmwsgZL2djaoYSblb0sdg3m3A5gvrUhAypwdMKqwdkFot7JlQEdmLhhamBz94DwPJ0x1DMweLmgaxD1toFwfHyxqAcmGD8bZA1s/gGQ+JQNDMKqnoEhOEQdriE0LDAcwpKMCMahnoEhki8KpiE6BsrgiBXCqR4I4uITUEMrMBGfciBISo5CUp6SSkA5CCSmpUOVZ2RmZROhgYFNPgesXjjXjrBiCDC0zQvP52TDKgcAwC5BBQq6zvAAAAAASUVORK5CYII="); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%; cursor: pointer;`
+        for (let i = 0; i < formData.length; i++) {
+            if(formData[i].usernameEl != null && formData[i].passwordEl != null) {
+                formData[i].usernameEl.style = addBitWardenStyle;
+                formData[i].passwordEl.style = addBitWardenStyle;
+                formData[i].passwordEl.onclick = () =>{
+                    console.log('DANCE');
+                }
+                formData[i].usernameEl.onclick = () =>{
+                    console.log('DANCE');
+                }
+            }
+        }
     }
 });
